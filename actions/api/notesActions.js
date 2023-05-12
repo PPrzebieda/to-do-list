@@ -1,38 +1,75 @@
 const NoteModel = require("../../db/models/note");
 
 module.exports = {
-  saveNote(req, res) {
-    // const note = new NoteModel({
-    //   title: "Test title",
-    //   description: "Test description",
-    // });
-
-    // note
-    //   .save()
-    //   .then(() => {
-    //     console.log("New note created!");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    const title = req.body.title;
-    const body = req.body.body;
-    res.send("save!" + title + body);
-  },
-
   getAllNotes(req, res) {
-    res.send("Api works!");
+    NoteModel.find()
+      .then((doc) => {
+        res.json(doc);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   getNote(req, res) {
-    res.send("Info about note");
+    const id = req.params.id;
+    NoteModel.findOne({ _id: id })
+      .then((doc) => {
+        res.json(doc);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  saveNote(req, res) {
+    const title = req.body.title;
+    const body = req.body.body;
+    const note = new NoteModel({
+      title: title,
+      body: body,
+    });
+
+    note
+      .save()
+      .then((doc) => {
+        res.json(doc);
+      })
+      .catch((error) => {
+        res.json({ message: error.message });
+      });
   },
 
   updateNote(req, res) {
     const id = req.params.id;
-    res.send(`updated ${id}`);
+    const title = req.body.title;
+    const body = req.body.body;
+
+    NoteModel.findOne({ _id: id })
+      .then((doc) => {
+        doc.title = title;
+        doc.body = body;
+        doc
+          .save()
+          .then((doc) => {
+            res.json(doc);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
+
   deleteNote(req, res) {
     const id = req.params.id;
-    res.send(`deleted Id: ${id} `);
+
+    NoteModel.deleteOne({ _id: id })
+      .then(() => {
+        res.sendStatus(204);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };

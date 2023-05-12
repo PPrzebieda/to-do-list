@@ -4,9 +4,11 @@ const { Schema } = mongoose;
 const noteSchema = new Schema({
   title: {
     type: String,
+    required: true,
   },
-  description: {
+  body: {
     type: String,
+    required: true,
   },
 });
 
