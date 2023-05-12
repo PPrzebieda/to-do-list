@@ -1,0 +1,49 @@
+.notes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #1d4e89;
+  .title {
+    p {
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+  .note {
+    background-color: #e8dab2;
+    width: 80%;
+    padding: 2em;
+    margin-bottom: 2em;
+    border-radius: 1em;
+    border: 2px solid #f79256;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+    h3 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+    .description {
+      font-style: italic;
+    }
+    .btn {
+      height: 30px;
+      width: 60px;
+      margin-right: 20px;
+      color: #1d4e89;
+      cursor: pointer;
+      font-size: 0.9em;
+
+      border-radius: 0.5em;
+    }
+    .edit {
+      background-color: #dd6e42;
+      color: #c0d6df;
+      border: 1px solid #1d4e89;
+    }
+    .delete {
+      background-color: #c0d6df;
+      border: 1px solid #1d4e89;
+    }
+  }
+}
